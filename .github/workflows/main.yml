@@ -11,7 +11,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build
-        run: javac src/*.java
+        run: javac -encoding UTF-8 src/*.java
 
   testing:
     runs-on: ubuntu-latest
@@ -20,10 +20,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build
-        run: javac src/*.java
+        run: javac -encoding UTF-8 src/*.java
       - name: Verify all files compile
         run: |
-          javac src/*.java
+          javac -encoding UTF-8 src/*.java
           echo "All files compiled successfully"
 
   acceptance:
@@ -33,7 +33,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build
-        run: javac src/*.java
+        run: javac -encoding UTF-8 src/*.java
       - name: Package application
         run: jar cvf jabberpoint.jar -C src .
 
@@ -44,6 +44,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Build
-        run: javac src/*.java
+        run: javac -encoding UTF-8 src/*.java
       - name: Package final application
         run: jar cvf jabberpoint-release.jar -C src .
