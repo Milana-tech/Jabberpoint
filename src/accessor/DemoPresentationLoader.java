@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * accessor.DemoPresentationLoader builds the built-in demo presentation in memory.
  * <p>
- * SRP: Responsible only for constructing demo slide content.
+ * SRP: Responsible only for constructing demo slide content
  * IO concerns stay in accessor.XMLAccessor; demo content lives here.
  */
 public class DemoPresentationLoader extends Accessor
