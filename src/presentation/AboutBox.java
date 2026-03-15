@@ -1,8 +1,10 @@
+package presentation;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * AboutBox shows the application's about dialog.
+ * presentation.AboutBox shows the application's about dialog.
  *
  * SRP: Responsible only for displaying the about message.
  */

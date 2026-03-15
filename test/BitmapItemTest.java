@@ -1,4 +1,6 @@
 import org.junit.jupiter.api.Test;
+import slide.BitmapItem;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class BitmapItemTest

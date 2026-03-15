@@ -1,11 +1,13 @@
+package slide;
+
 import java.awt.*;
 import java.awt.image.ImageObserver;
 
 /**
- * SlideItem is the abstract base class for all drawable items on a slide.
+ * slide.SlideItem is the abstract base class for all drawable items on a slide.
  * <p>
  * SRP: Owns only the level field and declares the drawing contract.
- * LSP: TextItem and BitmapItem fully substitute SlideItem wherever it is used.
+ * LSP: slide.TextItem and slide.BitmapItem fully substitute slide.SlideItem wherever it is used.
  */
 public abstract class SlideItem
 {

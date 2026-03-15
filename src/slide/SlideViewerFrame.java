@@ -1,10 +1,16 @@
+package slide;
+
+import controller.KeyController;
+import controller.MenuController;
+import presentation.Presentation;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 /**
- * SlideViewerFrame is the main application window.
+ * slide.SlideViewerFrame is the main application window.
  * <p>
  * SRP: Responsible only for constructing and configuring the top-level window.
  */

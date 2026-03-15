@@ -1,3 +1,5 @@
+package slide;
+
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
@@ -10,10 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * TextItem renders a single line of text on a slide, with word-wrapping.
+ * slide.TextItem renders a single line of text on a slide, with word-wrapping.
  * <p>
  * SRP: Responsible only for measuring and drawing attributed text.
- * LSP: Fully substitutes SlideItem — honours the drawing contract.
+ * LSP: Fully substitutes slide.SlideItem — honours the drawing contract.
  */
 public class TextItem extends SlideItem
 {
@@ -112,6 +114,6 @@ public class TextItem extends SlideItem
     @Override
     public String toString()
     {
-        return "TextItem[" + getLevel() + "," + this.getText() + "]";
+        return "slide.TextItem[" + getLevel() + "," + this.getText() + "]";
     }
 }

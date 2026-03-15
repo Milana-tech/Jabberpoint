@@ -1,7 +1,9 @@
+package slide;
+
 import java.awt.*;
 
 /**
- * Style defines the visual appearance for each slide item level.
+ * slide.Style defines the visual appearance for each slide item level.
  * <p>
  * SRP: Responsible only for holding and providing style data per level.
  */

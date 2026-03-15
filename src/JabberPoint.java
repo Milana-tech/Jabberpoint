@@ -1,3 +1,9 @@
+import accessor.Accessor;
+import accessor.XMLAccessor;
+import presentation.Presentation;
+import slide.SlideViewerFrame;
+import slide.Style;
+
 import javax.swing.*;
 import java.io.IOException;
 

@@ -1,12 +1,16 @@
+package presentation;
+
+import slide.Slide;
+
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Presentation holds all slides and manages the current slide position.
+ * presentation.Presentation holds all slides and manages the current slide position.
  * <p>
  * Observer pattern role: Subject — notifies registered PresentationObservers on slide changes.
  * SRP: Owns presentation state and navigation. Delegates display updates to observers.
- * DIP: Depends on PresentationObserver interface, not on SlideViewerComponent directly.
+ * DIP: Depends on presentation.PresentationObserver interface, not on slide.SlideViewerComponent directly.
  * OCP: New observers can be registered without changing this class.
  */
 public class Presentation
@@ -108,7 +112,7 @@ public class Presentation
         }
     }
 
-    // Slide management
+    // slide.Slide management
 
     public void append(Slide slide)
     {

@@ -1,10 +1,16 @@
+package accessor;
+
+import presentation.Presentation;
+import slide.BitmapItem;
+import slide.Slide;
+
 import java.io.IOException;
 
 /**
- * DemoPresentationLoader builds the built-in demo presentation in memory.
+ * accessor.DemoPresentationLoader builds the built-in demo presentation in memory.
  * <p>
  * SRP: Responsible only for constructing demo slide content.
- * IO concerns stay in XMLAccessor; demo content lives here.
+ * IO concerns stay in accessor.XMLAccessor; demo content lives here.
  */
 public class DemoPresentationLoader extends Accessor
 {
@@ -12,7 +18,7 @@ public class DemoPresentationLoader extends Accessor
     @Override
     public void loadPresentationFromFile(Presentation presentation, String filename)
     {
-        presentation.setTitle("Demo Presentation");
+        presentation.setTitle("Demo presentation.Presentation");
         presentation.append(this.buildIntroSlide());
         presentation.append(this.buildStylesSlide());
         presentation.append(this.buildClosingSlide());
@@ -28,7 +34,7 @@ public class DemoPresentationLoader extends Accessor
     {
         Slide slide = new Slide();
         slide.setTitle("JabberPoint");
-        slide.append(1, "The Java Presentation Tool");
+        slide.append(1, "The Java presentation.Presentation Tool");
         slide.append(2, "Copyright (c) 1996-2000: Ian Darwin");
         slide.append(2, "Copyright (c) 2000-now: Gert Florijn and Sylvia Stuurman");
         slide.append(4, "Running JabberPoint without a filename shows this demo");

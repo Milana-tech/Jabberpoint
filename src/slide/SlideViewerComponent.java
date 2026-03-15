@@ -1,14 +1,19 @@
+package slide;
+
+import presentation.Presentation;
+import presentation.PresentationObserver;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.Serial;
 
 /**
- * SlideViewerComponent renders the current slide inside the application window.
+ * slide.SlideViewerComponent renders the current slide inside the application window.
  * <p>
  * Observer pattern role: Concrete Observer reacts to slide changes via onSlideChanged().
  * SRP: Responsible only for rendering a slide onto the screen.
- * DIP: Registers itself with Presentation via the PresentationObserver interface
- * Presentation never references SlideViewerComponent directly.
+ * DIP: Registers itself with presentation.Presentation via the presentation.PresentationObserver interface
+ * presentation.Presentation never references slide.SlideViewerComponent directly.
  */
 public class SlideViewerComponent extends JComponent implements PresentationObserver
 {
@@ -47,7 +52,7 @@ public class SlideViewerComponent extends JComponent implements PresentationObse
     }
 
     /**
-     * Called by Presentation whenever the current slide changes.
+     * Called by presentation.Presentation whenever the current slide changes.
      * Observer pattern: update method.
      */
     @Override
@@ -78,7 +83,7 @@ public class SlideViewerComponent extends JComponent implements PresentationObse
     {
         g.setFont(this.slideNumberFont);
         g.setColor(LABEL_COLOR);
-        String label = "Slide " + (1 + this.presentation.getSlideNumber())
+        String label = "slide " + (1 + this.presentation.getSlideNumber())
                 + " of " + this.presentation.getSize();
         g.drawString(label, SLIDE_LABEL_X, SLIDE_LABEL_Y);
     }

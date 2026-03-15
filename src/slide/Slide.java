@@ -1,10 +1,12 @@
+package slide;
+
 import java.awt.*;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Slide represents a single slide in a presentation.
+ * slide.Slide represents a single slide in a presentation.
  * <p>
  * SRP: Owns slide state (title, items) and delegates drawing to its items.
  */
@@ -43,7 +45,7 @@ public class Slide
     }
 
     /**
-     * Convenience method: creates a TextItem and appends it.
+     * Convenience method: creates a slide.TextItem and appends it.
      */
     public void append(int level, String text)
     {

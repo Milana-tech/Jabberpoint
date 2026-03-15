@@ -1,8 +1,15 @@
+package accessor;
+
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+import presentation.Presentation;
+import slide.BitmapItem;
+import slide.Slide;
+import slide.SlideItem;
+import slide.TextItem;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -13,10 +20,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * XMLAccessor loads and saves presentations in the JabberPoint XML format.
+ * accessor.XMLAccessor loads and saves presentations in the JabberPoint XML format.
  * <p>
  * SRP: Responsible only for XML file IO and parsing.
- * Uses XMLTags enum so tag names are never repeated as raw strings.
+ * Uses accessor.XMLTags enum so tag names are never repeated as raw strings.
  */
 public class XMLAccessor extends Accessor
 {
@@ -173,7 +180,7 @@ public class XMLAccessor extends Accessor
         }
         else
         {
-            System.err.println("Skipping unknown SlideItem type: " + item);
+            System.err.println("Skipping unknown slide.SlideItem type: " + item);
         }
     }
 

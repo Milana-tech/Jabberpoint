@@ -1,3 +1,5 @@
+package slide;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -6,10 +8,10 @@ import java.io.File;
 import java.io.IOException;
 
 /**
- * BitmapItem renders an image file on a slide.
+ * slide.BitmapItem renders an image file on a slide.
  * <p>
  * SRP: Responsible only for loading and drawing a bitmap image.
- * LSP: Fully substitutes SlideItem — honours the drawing contract.
+ * LSP: Fully substitutes slide.SlideItem — honours the drawing contract.
  */
 public class BitmapItem extends SlideItem
 {
@@ -62,7 +64,7 @@ public class BitmapItem extends SlideItem
     @Override
     public String toString()
     {
-        return "BitmapItem[" + getLevel() + "," + this.imageName + "]";
+        return "slide.BitmapItem[" + getLevel() + "," + this.imageName + "]";
     }
 
     private static BufferedImage loadImage(String imageName)

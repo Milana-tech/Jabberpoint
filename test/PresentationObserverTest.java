@@ -1,5 +1,8 @@
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import presentation.Presentation;
+import presentation.PresentationObserver;
+import slide.Slide;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +10,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 /**
- * Unit tests for the Observer pattern in Presentation.
+ * Unit tests for the Observer pattern in presentation.Presentation.
  * <p>
  * Tests verify that:
  * - Observers are notified when the slide changes
@@ -59,9 +62,9 @@ class PresentationObserverTest
     {
         presentation = new Presentation();
         firstSlide = new Slide();
-        firstSlide.setTitle("First Slide");
+        firstSlide.setTitle("First slide.Slide");
         secondSlide = new Slide();
-        secondSlide.setTitle("Second Slide");
+        secondSlide.setTitle("Second slide.Slide");
         presentation.append(firstSlide);
         presentation.append(secondSlide);
     }

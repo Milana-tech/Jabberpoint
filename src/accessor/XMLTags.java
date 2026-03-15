@@ -1,8 +1,10 @@
+package accessor;
+
 /**
- * XMLTags enumerates all XML element and attribute names used in JabberPoint presentation files.
+ * accessor.XMLTags enumerates all XML element and attribute names used in JabberPoint presentation files.
  * <p>
  * SRP: This enum owns the single responsibility of defining the XML vocabulary.
- * OCP: Adding a new tag means adding an enum constant here, not changing XMLAccessor.
+ * OCP: Adding a new tag means adding an enum constant here, not changing accessor.XMLAccessor.
  */
 public enum XMLTags
 {

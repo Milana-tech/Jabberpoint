@@ -1,3 +1,9 @@
+package controller;
+
+import accessor.XMLAccessor;
+import presentation.AboutBox;
+import presentation.Presentation;
+
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
@@ -13,7 +19,7 @@ import java.io.Serial;
  * Actions.OPEN_FILE         — File > Open
  * Actions.NEW_PRESENTATION  — File > New
  * Actions.SAVE_FILE         — File > Save
- * Actions.EXIT              — File > Exit
+ * Actions. EXIT              — File > Exit
  * Actions.NEXT_SLIDE        — View > Next
  * Actions.PREVIOUS_SLIDE    — View > Prev
  * Actions.GO_TO_SLIDE       — View > Go to
@@ -62,21 +68,21 @@ public class MenuController extends MenuBar
         Menu fileMenu = new Menu(MENU_FILE);
 
         MenuItem openItem = this.createMenuItem(ITEM_OPEN);
-        openItem.addActionListener(e -> this.openPresentation());        // Actions.OPEN_FILE
+        openItem.addActionListener(e -> this.executeAction(Actions.OPEN_FILE));
         fileMenu.add(openItem);
 
         MenuItem newItem = this.createMenuItem(ITEM_NEW);
-        newItem.addActionListener(e -> this.newPresentation());          // Actions.NEW_PRESENTATION
+        newItem.addActionListener(e -> this.executeAction(Actions.NEW_PRESENTATION));
         fileMenu.add(newItem);
 
         MenuItem saveItem = this.createMenuItem(ITEM_SAVE);
-        saveItem.addActionListener(e -> this.savePresentation());        // Actions.SAVE_FILE
+        saveItem.addActionListener(e -> this.executeAction(Actions.SAVE_FILE));
         fileMenu.add(saveItem);
 
         fileMenu.addSeparator();
 
         MenuItem exitItem = this.createMenuItem(ITEM_EXIT);
-        exitItem.addActionListener(e -> this.presentation.exit(0)); // Actions.EXIT
+        exitItem.addActionListener(e -> this.executeAction(Actions.EXIT));
         fileMenu.add(exitItem);
 
         return fileMenu;
@@ -87,15 +93,15 @@ public class MenuController extends MenuBar
         Menu viewMenu = new Menu(MENU_VIEW);
 
         MenuItem nextItem = this.createMenuItem(ITEM_NEXT);
-        nextItem.addActionListener(e -> this.presentation.nextSlide()); // Actions.NEXT_SLIDE
+        nextItem.addActionListener(e -> this.executeAction(Actions.NEXT_SLIDE));
         viewMenu.add(nextItem);
 
         MenuItem prevItem = this.createMenuItem(ITEM_PREV);
-        prevItem.addActionListener(e -> this.presentation.prevSlide()); // Actions.PREVIOUS_SLIDE
+        prevItem.addActionListener(e -> this.executeAction(Actions.PREVIOUS_SLIDE));
         viewMenu.add(prevItem);
 
         MenuItem gotoItem = this.createMenuItem(ITEM_GOTO);
-        gotoItem.addActionListener(e -> this.goToSlide());                   // Actions.GO_TO_SLIDE
+        gotoItem.addActionListener(e -> this.executeAction(Actions.GO_TO_SLIDE));
         viewMenu.add(gotoItem);
 
         return viewMenu;
@@ -106,10 +112,29 @@ public class MenuController extends MenuBar
         Menu helpMenu = new Menu(MENU_HELP);
 
         MenuItem aboutItem = this.createMenuItem(ITEM_ABOUT);
-        aboutItem.addActionListener(e -> AboutBox.show(this.parentFrame)); // Actions.SHOW_ABOUT
+        aboutItem.addActionListener(e -> this.executeAction(Actions.SHOW_ABOUT));
         helpMenu.add(aboutItem);
 
         return helpMenu;
+    }
+
+    /**
+     * Central dispatcher — all menu actions pass through here.
+     * Adding a new action means adding a case here, not touching the menu-building methods.
+     */
+    private void executeAction(Actions action)
+    {
+        switch (action)
+        {
+            case OPEN_FILE -> this.openPresentation();
+            case NEW_PRESENTATION -> this.newPresentation();
+            case SAVE_FILE -> this.savePresentation();
+            case EXIT -> this.presentation.exit(0);
+            case NEXT_SLIDE -> this.presentation.nextSlide();
+            case PREVIOUS_SLIDE -> this.presentation.prevSlide();
+            case GO_TO_SLIDE -> this.goToSlide();
+            case SHOW_ABOUT -> AboutBox.show(this.parentFrame);
+        }
     }
 
     private void openPresentation()
