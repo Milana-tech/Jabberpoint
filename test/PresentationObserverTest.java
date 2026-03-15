@@ -46,7 +46,7 @@ class PresentationObserverTest
             {
                 return null;
             }
-            return receivedSlides.getLast();
+            return receivedSlides.get(receivedSlides.size() - 1);
         }
     }
 
