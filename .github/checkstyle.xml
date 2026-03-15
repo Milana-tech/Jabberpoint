@@ -88,10 +88,7 @@
             <property name="allowNoEmptyLineBetweenFields" value="true"/>
         </module>
 
-        <module name="DeclarationOrder">
-            <property name="ignoreConstructors" value="false"/>
-            <property name="ignoreMethods" value="false"/>
-        </module>
+        <module name="DeclarationOrder"/>
 
         <module name="RequireThis">
             <property name="checkFields" value="true"/>
