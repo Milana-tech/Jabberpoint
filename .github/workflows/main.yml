@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     environment: development
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build
         run: javac -encoding UTF-8 src/*.java
@@ -24,7 +24,7 @@ jobs:
     environment: testing
     needs: development
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Set up JDK 17
         uses: actions/setup-java@v3
@@ -53,7 +53,7 @@ jobs:
     environment: acceptance
     needs: testing
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build
         run: javac -encoding UTF-8 src/*.java
@@ -66,7 +66,7 @@ jobs:
     environment: production
     needs: acceptance
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Build
         run: javac -encoding UTF-8 src/*.java

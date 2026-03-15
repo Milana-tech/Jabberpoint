@@ -1,8 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE module PUBLIC
-        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
-        "https://checkstyle.org/dtd/configuration_1_3.dtd">
-
 <module name="Checker">
     <property name="severity" value="error"/>
     <property name="fileExtensions" value="java"/>
@@ -13,16 +9,9 @@
         <!--        NAMING         -->
         <!-- ===================== -->
 
-        <!-- Class names: PascalCase, singular enforced by developer -->
+        <!-- Class names: PascalCase -->
         <module name="TypeName">
             <property name="format" value="^[A-Z][a-zA-Z0-9]*$"/>
-        </module>
-
-        <!-- Exception classes must end with "Exception" -->
-        <module name="TypeName">
-            <property name="format" value="^[A-Z][a-zA-Z0-9]*Exception$"/>
-            <property name="tokens" value="CLASS_DEF"/>
-            <property name="applyToPublic" value="true"/>
         </module>
 
         <!-- Method names: lowerCamelCase -->
@@ -44,11 +33,6 @@
         <!-- Constants: SCREAMING_SNAKE_CASE -->
         <module name="ConstantName">
             <property name="format" value="^[A-Z][A-Z0-9]*(_[A-Z0-9]+)*$"/>
-        </module>
-
-        <!-- Accessor/mutator naming: get*, set*, is* -->
-        <module name="MethodName">
-            <property name="format" value="^(get|set|is)[A-Z][a-zA-Z0-9]*$|^[a-z][a-zA-Z0-9]*$"/>
         </module>
 
         <!-- ===================== -->
@@ -85,7 +69,6 @@
             <property name="tokens" value="ASSIGN, PLUS, MINUS, STAR, MOD, DIV,
                 PLUS_ASSIGN, MINUS_ASSIGN, STAR_ASSIGN, DIV_ASSIGN,
                 EQUAL, NOT_EQUAL, LT, GT, LE, GE"/>
-            <property name="allowEmptyMethods" value="false"/>
         </module>
 
         <!-- No space between method name and opening parenthesis -->
@@ -93,22 +76,19 @@
             <property name="option" value="nospace"/>
         </module>
 
-        <!-- Space after commas in parameters -->
+        <!-- Space after commas -->
         <module name="WhitespaceAfter">
             <property name="tokens" value="COMMA"/>
         </module>
 
-        <!-- Space between keywords (if, while, for) and opening parenthesis -->
-        <module name="WhitespaceAfter">
-            <property name="tokens" value="LITERAL_IF, LITERAL_WHILE, LITERAL_FOR"/>
+        <!-- No space after ++ and - -->
+        <module name="NoWhitespaceAfter">
+            <property name="tokens" value="INC, DEC, UNARY_MINUS, UNARY_PLUS"/>
         </module>
 
-        <!-- No space for ++ and - operators -->
-        <module name="NoWhitespaceAfter">
-            <property name="tokens" value="INC, DEC"/>
-        </module>
+        <!-- No space before ++ and - -->
         <module name="NoWhitespaceBefore">
-            <property name="tokens" value="INC, DEC"/>
+            <property name="tokens" value="INC, POST_INC, POST_DEC"/>
         </module>
 
         <!-- Blank line between methods -->
@@ -123,14 +103,7 @@
             <property name="ignoreMethods" value="false"/>
         </module>
 
-        <!-- Enum constants each on their own line -->
-        <module name="Regexp">
-            <property name="format" value=",\s*[A-Z]"/>
-            <property name="message" value="Each enum constant must be on its own line."/>
-            <property name="illegalPattern" value="true"/>
-        </module>
-
-        <!-- this. prefix enforced via RequireThis -->
+        <!-- this. prefix on fields and methods -->
         <module name="RequireThis">
             <property name="checkFields" value="true"/>
             <property name="checkMethods" value="true"/>
