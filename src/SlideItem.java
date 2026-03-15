@@ -1,18 +1,27 @@
 import java.awt.*;
 import java.awt.image.ImageObserver;
 
+/**
+ * SlideItem is the abstract base class for all drawable items on a slide.
+ * <p>
+ * SRP: Owns only the level field and declares the drawing contract.
+ * LSP: TextItem and BitmapItem fully substitute SlideItem wherever it is used.
+ */
 public abstract class SlideItem
 {
-    private int level = 0;
 
-    public SlideItem(int lev)
+    public static final int DEFAULT_LEVEL = 0;
+
+    private final int level;
+
+    public SlideItem(int level)
     {
-        this.level = lev;
+        this.level = level;
     }
 
     public SlideItem()
     {
-        this(0);
+        this(DEFAULT_LEVEL);
     }
 
     public int getLevel()
@@ -20,9 +29,7 @@ public abstract class SlideItem
         return this.level;
     }
 
-    public abstract Rectangle getBoundingBox(Graphics g,
-                                             ImageObserver observer, float scale, Style style);
+    public abstract Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style);
 
-    public abstract void draw(int x, int y, float scale,
-                              Graphics g, Style style, ImageObserver observer);
+    public abstract void draw(int x, int y, float scale, Graphics g, Style style, ImageObserver observer);
 }

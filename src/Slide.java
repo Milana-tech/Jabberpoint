@@ -1,22 +1,25 @@
 import java.awt.*;
 import java.awt.image.ImageObserver;
-import java.util.Vector;
+import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Slide represents a single slide in a presentation.
+ * <p>
+ * SRP: Owns slide state (title, items) and delegates drawing to its items.
+ */
 public class Slide
 {
-    public final static int WIDTH = 1200;
-    public final static int HEIGHT = 800;
-    protected String title;
-    protected Vector<SlideItem> items;
+
+    public static final int WIDTH = 1200;
+    public static final int HEIGHT = 800;
+
+    private String title;
+    private final List<SlideItem> slideItems;
 
     public Slide()
     {
-        this.items = new Vector<SlideItem>();
-    }
-
-    public void append(SlideItem anItem)
-    {
-        this.items.addElement(anItem);
+        this.slideItems = new ArrayList<>();
     }
 
     public String getTitle()
@@ -24,51 +27,64 @@ public class Slide
         return this.title;
     }
 
-    public void setTitle(String newTitle)
+    public void setTitle(String title)
     {
-        this.title = newTitle;
-    }
-
-    public void append(int level, String message)
-    {
-        this.append(new TextItem(level, message));
-    }
-
-    public SlideItem getSlideItem(int number)
-    {
-        return this.items.elementAt(number);
-    }
-
-    public Vector<SlideItem> getSlideItems()
-    {
-        return this.items;
+        this.title = title;
     }
 
     public int getSize()
     {
-        return this.items.size();
+        return this.slideItems.size();
+    }
+
+    public void append(SlideItem item)
+    {
+        this.slideItems.add(item);
+    }
+
+    /**
+     * Convenience method: creates a TextItem and appends it.
+     */
+    public void append(int level, String text)
+    {
+        this.append(new TextItem(level, text));
+    }
+
+    public SlideItem getSlideItem(int index)
+    {
+        return this.slideItems.get(index);
+    }
+
+    public List<SlideItem> getSlideItems()
+    {
+        return this.slideItems;
     }
 
     public void draw(Graphics g, Rectangle area, ImageObserver view)
     {
-        float scale = this.getScale(area);
+        float scale = this.calculateScale(area);
         int y = area.y;
 
-        SlideItem slideItem = new TextItem(0, this.getTitle());
-        Style style = Style.getStyle(slideItem.getLevel());
-        slideItem.draw(area.x, y, scale, g, style, view);
-        y += slideItem.getBoundingBox(g, view, scale, style).height;
-        for (int number = 0; number < this.getSize(); number++)
+        // Draw the slide title as a level-0 text item
+
+        SlideItem titleItem = new TextItem(0, this.getTitle());
+        Style titleStyle = Style.getStyle(titleItem.getLevel());
+        titleItem.draw(area.x, y, scale, g, titleStyle, view);
+        y += titleItem.getBoundingBox(g, view, scale, titleStyle).height;
+
+        for (SlideItem item : this.slideItems)
         {
-            slideItem = this.getSlideItems().elementAt(number);
-            style = Style.getStyle(slideItem.getLevel());
-            slideItem.draw(area.x, y, scale, g, style, view);
-            y += slideItem.getBoundingBox(g, view, scale, style).height;
+            Style style = Style.getStyle(item.getLevel());
+            item.draw(area.x, y, scale, g, style, view);
+            y += item.getBoundingBox(g, view, scale, style).height;
         }
     }
 
-    private float getScale(Rectangle area)
+    private float calculateScale(Rectangle area)
     {
-        return Math.min(((float) area.width) / ((float) WIDTH), ((float) area.height) / ((float) HEIGHT));
+        return Math.min(
+                (float) area.width / (float) WIDTH,
+                (float) area.height / (float) HEIGHT
+        );
     }
 }

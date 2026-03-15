@@ -7,24 +7,30 @@ import java.awt.geom.Rectangle2D;
 import java.awt.image.ImageObserver;
 import java.text.AttributedString;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
+/**
+ * TextItem renders a single line of text on a slide, with word-wrapping.
+ * <p>
+ * SRP: Responsible only for measuring and drawing attributed text.
+ * LSP: Fully substitutes SlideItem — honours the drawing contract.
+ */
 public class TextItem extends SlideItem
 {
-    private static final String EMPTYTEXT = "No Text Given";
+
+    private static final String EMPTY_TEXT = "No Text Given";
 
     private final String text;
 
-    public TextItem(int level, String string)
+    public TextItem(int level, String text)
     {
         super(level);
-        this.text = string;
+        this.text = text;
     }
 
     public TextItem()
     {
-        this(0, EMPTYTEXT);
+        this(DEFAULT_LEVEL, EMPTY_TEXT);
     }
 
     public String getText()
@@ -32,74 +38,78 @@ public class TextItem extends SlideItem
         return this.text == null ? "" : this.text;
     }
 
-    public AttributedString getAttributedString(Style style, float scale)
+    @Override
+    public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style)
     {
-        AttributedString attrStr = new AttributedString(this.getText());
-        attrStr.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, this.text.length());
-        return attrStr;
-    }
-
-    public Rectangle getBoundingBox(Graphics g, ImageObserver observer,
-                                    float scale, Style myStyle)
-    {
-        List<TextLayout> layouts = this.getLayouts(g, myStyle, scale);
-        int xsize = 0, ysize = (int) (myStyle.leading * scale);
-        Iterator<TextLayout> iterator = layouts.iterator();
-        while (iterator.hasNext())
+        List<TextLayout> layouts = this.buildLayouts(g, style, scale);
+        int width = 0;
+        int height = (int) (style.leading * scale);
+        for (TextLayout layout : layouts)
         {
-            TextLayout layout = iterator.next();
             Rectangle2D bounds = layout.getBounds();
-            if (bounds.getWidth() > xsize)
+            if (bounds.getWidth() > width)
             {
-                xsize = (int) bounds.getWidth();
+                width = (int) bounds.getWidth();
             }
             if (bounds.getHeight() > 0)
             {
-                ysize += bounds.getHeight();
+                height += (int) bounds.getHeight();
             }
-            ysize += layout.getLeading() + layout.getDescent();
+            height += (int) (layout.getLeading() + layout.getDescent());
         }
-        return new Rectangle((int) (myStyle.indent * scale), 0, xsize, ysize);
+        return new Rectangle((int) (style.indent * scale), 0, width, height);
     }
 
-    public void draw(int x, int y, float scale, Graphics g,
-                     Style myStyle, ImageObserver o)
+    @Override
+    public void draw(int x, int y, float scale, Graphics g, Style style, ImageObserver observer)
     {
-        if (this.text == null || this.text.length() == 0)
+        if (this.isEmpty())
         {
             return;
         }
-        List<TextLayout> layouts = this.getLayouts(g, myStyle, scale);
-        Point pen = new Point(x + (int) (myStyle.indent * scale),
-                y + (int) (myStyle.leading * scale));
+        List<TextLayout> layouts = this.buildLayouts(g, style, scale);
+        Point pen = new Point(
+                x + (int) (style.indent * scale),
+                y + (int) (style.leading * scale)
+        );
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setColor(myStyle.color);
-        Iterator<TextLayout> it = layouts.iterator();
-        while (it.hasNext())
+        g2d.setColor(style.color);
+        for (TextLayout layout : layouts)
         {
-            TextLayout layout = it.next();
-            pen.y += layout.getAscent();
+            pen.y += (int) layout.getAscent();
             layout.draw(g2d, pen.x, pen.y);
-            pen.y += layout.getDescent();
+            pen.y += (int) layout.getDescent();
         }
     }
 
-    private List<TextLayout> getLayouts(Graphics g, Style s, float scale)
+    private boolean isEmpty()
     {
-        List<TextLayout> layouts = new ArrayList<TextLayout>();
-        AttributedString attrStr = this.getAttributedString(s, scale);
+        return this.text == null || this.text.isEmpty();
+    }
+
+    private List<TextLayout> buildLayouts(Graphics g, Style style, float scale)
+    {
+        List<TextLayout> layouts = new ArrayList<>();
+        AttributedString attributedString = this.buildAttributedString(style, scale);
         Graphics2D g2d = (Graphics2D) g;
         FontRenderContext frc = g2d.getFontRenderContext();
-        LineBreakMeasurer measurer = new LineBreakMeasurer(attrStr.getIterator(), frc);
-        float wrappingWidth = (Slide.WIDTH - s.indent) * scale;
+        LineBreakMeasurer measurer = new LineBreakMeasurer(attributedString.getIterator(), frc);
+        float wrappingWidth = (Slide.WIDTH - style.indent) * scale;
         while (measurer.getPosition() < this.getText().length())
         {
-            TextLayout layout = measurer.nextLayout(wrappingWidth);
-            layouts.add(layout);
+            layouts.add(measurer.nextLayout(wrappingWidth));
         }
         return layouts;
     }
 
+    private AttributedString buildAttributedString(Style style, float scale)
+    {
+        AttributedString attributedString = new AttributedString(this.getText());
+        attributedString.addAttribute(TextAttribute.FONT, style.getFont(scale), 0, this.getText().length());
+        return attributedString;
+    }
+
+    @Override
     public String toString()
     {
         return "TextItem[" + getLevel() + "," + this.getText() + "]";
