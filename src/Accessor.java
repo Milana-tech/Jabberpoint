@@ -1,20 +1,23 @@
 import java.io.IOException;
 
+/**
+ * Accessor is the abstract base for all presentation loaders and savers.
+ * <p>
+ * SRP: Defines the contract for IO operations on a Presentation.
+ * OCP: New file formats are supported by subclassing Accessor, not by modifying it.
+ */
 public abstract class Accessor
 {
-    public static final String DEMO_NAME = "Demonstratie presentatie";
-    public static final String DEFAULT_EXTENSION = ".xml";
 
-    public Accessor()
-    {
-    }
+    public static final String DEMO_NAME = "Demo Presentation";
+    public static final String DEFAULT_EXTENSION = ".xml";
 
     public static Accessor getDemoAccessor()
     {
-        return new DemoPresentation();
+        return new DemoPresentationLoader();
     }
 
-    abstract public void loadFile(Presentation p, String fn) throws IOException;
+    public abstract void loadPresentationFromFile(Presentation presentation, String filename) throws IOException;
 
-    abstract public void saveFile(Presentation p, String fn) throws IOException;
+    public abstract void savePresentationToFile(Presentation presentation, String filename) throws IOException;
 }
