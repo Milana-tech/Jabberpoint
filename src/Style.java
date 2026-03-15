@@ -2,11 +2,12 @@ import java.awt.*;
 
 /**
  * Style defines the visual appearance for each slide item level.
+ * <p>
  * SRP: Responsible only for holding and providing style data per level.
- * The static factory method createStyles() initialises all levels at application startup.
  */
 public class Style
 {
+
     private static final String FONT_NAME = "Helvetica";
     private static final int STYLE_COUNT = 5;
 
