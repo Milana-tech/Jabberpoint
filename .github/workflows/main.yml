@@ -75,7 +75,7 @@ jobs:
         run: jar cvf jabberpoint-release.jar -C src .
 
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: jabberpoint-release
           path: jabberpoint-release.jar
