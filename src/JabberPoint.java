@@ -1,35 +1,54 @@
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * JabberPoint is the application entry point.
+ * <p>
+ * SRP: Responsible only for bootstrapping the application — wiring styles,
+ * presentation, and viewer, then loading the initial content.
+ */
 public class JabberPoint
 {
-    protected static final String IOERR = "IO Error: ";
-    protected static final String JABERR = "Jabberpoint Error ";
-    protected static final String JABVERSION = "Jabberpoint 1.6 - OU version";
 
-    public static void main(String[] argv)
+    private static final String APPLICATION_TITLE = "JabberPoint 1.6 - OU";
+    private static final String STARTUP_ERROR_TITLE = "JabberPoint Error";
+
+    public static void main(String[] args)
     {
-
         Style.createStyles();
         Presentation presentation = new Presentation();
-        new SlideViewerFrame(JABVERSION, presentation);
+        new SlideViewerFrame(APPLICATION_TITLE, presentation);
+
         try
         {
-            if (argv.length == 0)
-            {
-                Accessor.getDemoAccessor().loadFile(presentation, "");
-            }
-            else
-            {
-                new XMLAccessor().loadFile(presentation, argv[0]);
-            }
+            loadInitialPresentation(presentation, args);
             presentation.setSlideNumber(0);
         }
-        catch (IOException ex)
+        catch (IOException e)
         {
-            JOptionPane.showMessageDialog(null,
-                    IOERR + ex, JABERR,
-                    JOptionPane.ERROR_MESSAGE);
+            showStartupError(e);
         }
+    }
+
+    private static void loadInitialPresentation(Presentation presentation, String[] args) throws IOException
+    {
+        if (args.length == 0)
+        {
+            Accessor.getDemoAccessor().loadPresentationFromFile(presentation, "");
+        }
+        else
+        {
+            new XMLAccessor().loadPresentationFromFile(presentation, args[0]);
+        }
+    }
+
+    private static void showStartupError(IOException e)
+    {
+        JOptionPane.showMessageDialog(
+                null,
+                "IO Error: " + e.getMessage(),
+                STARTUP_ERROR_TITLE,
+                JOptionPane.ERROR_MESSAGE
+        );
     }
 }
