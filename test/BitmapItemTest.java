@@ -12,10 +12,10 @@ public class BitmapItemTest
     }
 
     @Test
-    void constructor_defaultConstructor_setsLevelToZero()
+    void constructor_withLevelAndName_setsLevelCorrectly()
     {
-        BitmapItem item = new BitmapItem();
+        BitmapItem item = new BitmapItem(1, "test.jpg");
 
-        assertEquals(0, item.getLevel());
+        assertEquals(1, item.getLevel());
     }
 }
