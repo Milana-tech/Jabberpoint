@@ -1,42 +1,82 @@
 import java.util.ArrayList;
+import java.util.List;
 
+/**
+ * Presentation holds all slides and manages the current slide position.
+ * <p>
+ * Observer pattern role: Subject — notifies registered PresentationObservers on slide changes.
+ * SRP: Owns presentation state and navigation. Delegates display updates to observers.
+ * DIP: Depends on PresentationObserver interface, not on SlideViewerComponent directly.
+ * OCP: New observers can be registered without changing this class.
+ */
 public class Presentation
 {
-    private String showTitle;
-    private ArrayList<Slide> showList = null;
-    private int currentSlideNumber = 0;
-    private SlideViewerComponent slideViewComponent = null;
+
+    private static final int NO_SLIDE = -1;
+
+    private String title;
+    private final List<Slide> slides;
+    private int currentSlideNumber;
+
+    // Observer pattern: list of registered observers
+
+    private final List<PresentationObserver> observers;
 
     public Presentation()
     {
-        this.slideViewComponent = null;
-        this.clear();
+        this.slides = new ArrayList<>();
+        this.observers = new ArrayList<>();
+        this.currentSlideNumber = NO_SLIDE;
     }
 
-    public Presentation(SlideViewerComponent slideViewerComponent)
+    // Observer pattern registration
+
+    /**
+     * Registers an observer to be notified when the current slide changes.
+     * Observer pattern: subscribe.
+     */
+    public void addObserver(PresentationObserver observer)
     {
-        this.slideViewComponent = slideViewerComponent;
-        this.clear();
+        this.observers.add(observer);
+    }
+
+    /**
+     * Removes a previously registered observer.
+     * Observer pattern: unsubscribe.
+     */
+    public void removeObserver(PresentationObserver observer)
+    {
+        this.observers.remove(observer);
+    }
+
+    /**
+     * Notifies all registered observers with the current slide.
+     * Observer pattern: notify.
+     */
+    private void notifyObservers()
+    {
+        Slide currentSlide = this.getCurrentSlide();
+        for (PresentationObserver observer : this.observers)
+        {
+            observer.onSlideChanged(currentSlide);
+        }
+    }
+
+    // Getters and setters
+
+    public String getTitle()
+    {
+        return this.title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
 
     public int getSize()
     {
-        return this.showList.size();
-    }
-
-    public String getTitle()
-    {
-        return this.showTitle;
-    }
-
-    public void setTitle(String nt)
-    {
-        this.showTitle = nt;
-    }
-
-    public void setShowView(SlideViewerComponent slideViewerComponent)
-    {
-        this.slideViewComponent = slideViewerComponent;
+        return this.slides.size();
     }
 
     public int getSlideNumber()
@@ -47,9 +87,16 @@ public class Presentation
     public void setSlideNumber(int number)
     {
         this.currentSlideNumber = number;
-        if (this.slideViewComponent != null)
+        this.notifyObservers();
+    }
+
+    // Navigation
+
+    public void nextSlide()
+    {
+        if (this.currentSlideNumber < this.slides.size() - 1)
         {
-            this.slideViewComponent.update(this, this.getCurrentSlide());
+            this.setSlideNumber(this.currentSlideNumber + 1);
         }
     }
 
@@ -61,33 +108,20 @@ public class Presentation
         }
     }
 
-    public void nextSlide()
-    {
-        if (this.currentSlideNumber < (this.showList.size() - 1))
-        {
-            this.setSlideNumber(this.currentSlideNumber + 1);
-        }
-    }
-
-    void clear()
-    {
-        this.showList = new ArrayList<Slide>();
-        this.setSlideNumber(-1);
-    }
+    // Slide management
 
     public void append(Slide slide)
     {
-        this.showList.add(slide);
+        this.slides.add(slide);
     }
 
-    // Geef een slide met een bepaald slidenummer
     public Slide getSlide(int number)
     {
-        if (number < 0 || number >= this.getSize())
+        if (this.isValidSlideNumber(number))
         {
-            return null;
+            return this.slides.get(number);
         }
-        return this.showList.get(number);
+        return null;
     }
 
     public Slide getCurrentSlide()
@@ -95,8 +129,19 @@ public class Presentation
         return this.getSlide(this.currentSlideNumber);
     }
 
-    public void exit(int n)
+    public void clear()
     {
-        System.exit(n);
+        this.slides.clear();
+        this.setSlideNumber(NO_SLIDE);
+    }
+
+    public void exit(int status)
+    {
+        System.exit(status);
+    }
+
+    private boolean isValidSlideNumber(int number)
+    {
+        return number >= 0 && number < this.slides.size();
     }
 }
