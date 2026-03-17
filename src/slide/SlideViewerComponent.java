@@ -76,7 +76,7 @@ public class SlideViewerComponent extends JComponent implements PresentationObse
 
         this.drawSlideNumberLabel(g);
         Rectangle drawArea = new Rectangle(0, SLIDE_LABEL_Y, getWidth(), getHeight() - SLIDE_LABEL_Y);
-        this.currentSlide.draw(g, drawArea, this);
+        this.currentSlide.renderTo(g, drawArea, this);
     }
 
     private void drawSlideNumberLabel(Graphics g)

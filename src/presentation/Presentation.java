@@ -26,10 +26,15 @@ public class Presentation
 
     private final List<PresentationObserver> observers;
 
+    // Decorator pattern: list of registered components
+
+    private final List<PresentationComponent> components;
+
     public Presentation()
     {
         this.slides = new ArrayList<>();
         this.observers = new ArrayList<>();
+        this.components = new ArrayList<>();
         this.currentSlideNumber = NO_SLIDE;
     }
 

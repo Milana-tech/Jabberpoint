@@ -1,5 +1,7 @@
 package slide;
 
+import presentation.PresentationComponent;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -19,16 +21,18 @@ public class BitmapItem extends SlideItem
     private final String imageName;
     private final BufferedImage image;
 
-    public BitmapItem(int level, String imageName)
+    public BitmapItem(PresentationComponent wrapped, int level, String imageName)
     {
-        super(level);
+        super(wrapped, level);
         this.imageName = imageName;
         this.image = loadImage(imageName);
     }
 
-    public BitmapItem()
+    public BitmapItem(int level, String imageName )
     {
-        this(DEFAULT_LEVEL, null);
+        super(level);
+        this.imageName = imageName;
+        this.image = loadImage(imageName);
     }
 
     public String getName()
