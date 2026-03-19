@@ -15,7 +15,7 @@ public abstract class SlideItem implements PresentationComponent
 {
     public static final int DEFAULT_LEVEL = 0;
 
-    // The components that is decorated
+    // The components that are decorated
 
     private final PresentationComponent wrapped;
 

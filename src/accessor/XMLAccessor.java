@@ -6,10 +6,8 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import presentation.Presentation;
-import slide.BitmapItem;
-import slide.Slide;
-import slide.SlideItem;
-import slide.TextItem;
+import slide.*;
+import slide.SlideComponentFactoryManager;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -27,11 +25,13 @@ import java.io.PrintWriter;
  */
 public class XMLAccessor extends Accessor
 {
-
-    private static final String PARSER_CONFIG_ERROR = "Parser configuration error while reading XML";
+    private static final SlideComponentFactoryManager FACTORY_MANAGER = new SlideComponentFactoryManager();
+    private static final String PARSER_CONFIG_ERROR = "Parser configuration error";
     private static final String UNKNOWN_ITEM_TYPE = "Unknown slide item type: ";
     private static final String UNKNOWN_LEVEL = "Could not read item level, defaulting to 1";
     private static final int DEFAULT_ITEM_LEVEL = 1;
+
+    private XMLTags message;
 
     @Override
     public void loadPresentationFromFile(Presentation presentation, String filename) throws IOException
@@ -94,19 +94,8 @@ public class XMLAccessor extends Accessor
         String kind = attributes.getNamedItem(XMLTags.KIND.getTag()).getTextContent();
         String content = itemElement.getTextContent();
 
-        if (XMLTags.TEXT.getTag().equals(kind))
-        {
-            return new TextItem(level, content);
-        }
-        else if (XMLTags.IMAGE.getTag().equals(kind))
-        {
-            return new BitmapItem(level, content);
-        }
-        else
-        {
-            System.err.println(UNKNOWN_ITEM_TYPE + kind);
-            return new TextItem(level, content);
-        }
+        // replaced if/else chain with F.M pattern, delegates item creation to SlideComponentFactoryManager
+        return FACTORY_MANAGER.createComponent(kind, level, content);
     }
 
     private int readItemLevel(NamedNodeMap attributes)
