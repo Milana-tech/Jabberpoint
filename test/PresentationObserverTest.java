@@ -1,7 +1,8 @@
-package presentation;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import presentation.Presentation;
+import presentation.PresentationComponent;
+import presentation.PresentationObserver;
 import slide.Slide;
 
 import java.util.ArrayList;

@@ -1,8 +1,9 @@
-package slide;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import presentation.PresentationComponent;
+import slide.Slide;
+import slide.Style;
+import slide.TextItem;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
