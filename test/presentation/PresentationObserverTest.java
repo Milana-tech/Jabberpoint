@@ -1,7 +1,7 @@
+package presentation;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import presentation.Presentation;
-import presentation.PresentationObserver;
 import slide.Slide;
 
 import java.util.ArrayList;
@@ -30,10 +30,10 @@ class PresentationObserverTest
 
     static class RecordingObserver implements PresentationObserver
     {
-        private final List<Slide> receivedSlides = new ArrayList<>();
+        private final List<PresentationComponent> receivedSlides = new ArrayList<>();
 
         @Override
-        public void onSlideChanged(Slide slide)
+        public void onSlideChanged(PresentationComponent slide)
         {
             receivedSlides.add(slide);
         }
@@ -43,7 +43,7 @@ class PresentationObserverTest
             return receivedSlides.size();
         }
 
-        public Slide getLastReceivedSlide()
+        public PresentationComponent getLastReceivedSlide()
         {
             if (receivedSlides.isEmpty())
             {

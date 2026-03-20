@@ -1,6 +1,7 @@
 package slide;
 
 import presentation.Presentation;
+import presentation.PresentationComponent;
 import presentation.PresentationObserver;
 
 import javax.swing.*;
@@ -29,7 +30,7 @@ public class SlideViewerComponent extends JComponent implements PresentationObse
     private static final int SLIDE_LABEL_X = 1100;
     private static final int SLIDE_LABEL_Y = 20;
 
-    private Slide currentSlide;
+    private PresentationComponent currentSlide;
     private final Font slideNumberFont;
     private final Presentation presentation;
     private final JFrame parentFrame;
@@ -56,7 +57,7 @@ public class SlideViewerComponent extends JComponent implements PresentationObse
      * Observer pattern: update method.
      */
     @Override
-    public void onSlideChanged(Slide slide)
+    public void onSlideChanged(PresentationComponent slide)
     {
         this.currentSlide = slide;
         repaint();

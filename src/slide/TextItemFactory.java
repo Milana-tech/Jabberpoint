@@ -1,13 +1,14 @@
 package slide;
 
 import accessor.XMLTags;
+import presentation.PresentationComponent;
 
 public class TextItemFactory implements SlideComponentFactory
 {
     @Override
-    public SlideItem createComponent(int level, String content)
+    public SlideItem createComponent(PresentationComponent wrapped, int level, String content)
     {
-        return new TextItem(level, content);
+        return new TextItem(wrapped, level, content);
     }
 
     @Override

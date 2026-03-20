@@ -1,5 +1,7 @@
 package slide;
 
+import presentation.PresentationComponent;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,7 +47,7 @@ public class SlideComponentFactoryManager
         this.factories.put(factory.getType(), factory);
     }
 
-    public SlideItem createComponent(String type, int level, String content)
+    public SlideItem createComponent(PresentationComponent wrapped, String type, int level, String content)
     {
         SlideComponentFactory factory = this.factories.get(type);
 
@@ -54,7 +56,7 @@ public class SlideComponentFactoryManager
             throw new IllegalArgumentException("Unknown component type: " + type);
         }
 
-        return factory.createComponent(level, content);
+        return factory.createComponent(wrapped, level, content);
     }
 
     public String getType(SlideItem component)

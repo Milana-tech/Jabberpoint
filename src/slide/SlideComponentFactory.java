@@ -1,10 +1,12 @@
 package slide;
 
+import presentation.PresentationComponent;
+
 public interface SlideComponentFactory
 {
-    public SlideItem createComponent(int level, String content);
+    SlideItem createComponent(PresentationComponent wrapped, int level, String content);
 
-    public String getType();
+    String getType();
 
-    public boolean canHandle(SlideItem component);
+    boolean canHandle(SlideItem component);
 }

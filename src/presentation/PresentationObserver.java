@@ -1,7 +1,5 @@
 package presentation;
 
-import slide.Slide;
-
 /**
  * presentation.PresentationObserver is the Observer interface for the Observer pattern.
  * Any component that needs to react to slide changes implements this interface.
@@ -19,5 +17,5 @@ public interface PresentationObserver
      *
      * @param slide the slide that is now active, or null if the presentation is empty
      */
-    void onSlideChanged(Slide slide);
+    void onSlideChanged(PresentationComponent slide);
 }

@@ -1,7 +1,7 @@
 package accessor;
 
 import presentation.Presentation;
-import slide.BitmapItem;
+import presentation.PresentationComponent;
 import slide.Slide;
 import slide.SlideComponentFactoryManager;
 
@@ -32,46 +32,49 @@ public class DemoPresentationLoader extends Accessor
         throw new UnsupportedOperationException("Cannot save the demo presentation to a file.");
     }
 
-    private Slide buildIntroSlide()
+    private PresentationComponent buildIntroSlide()
     {
-        Slide slide = new Slide();
-        slide.setTitle("JabberPoint");
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 1, "The Java presentation.Presentation Tool"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 2, "Copyright (c) 1996-2000: Ian Darwin"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 2, "Copyright (c) 2000-now: Gert Florijn and Sylvia Stuurman"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 4, "Running JabberPoint without a filename shows this demo"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 1, "Navigation:"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 3, "Next slide: PgDn or Enter"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 3, "Previous slide: PgUp or up-arrow"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 3, "Quit: q or Q"));
+        Slide base = new Slide();
+        base.setTitle("JabberPoint");
 
-        return slide;
+        PresentationComponent chain = base;
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "The Java presentation.Presentation Tool");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "Copyright (c) 1996-2000: Ian Darwin");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "Copyright (c) 2000-now: Gert Florijn and Sylvia Stuurman");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 4, "Running JabberPoint without a filename shows    this demo");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "Navigation:");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 3, "Next slide: PgDn or Enter");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 3, "Previous slide: PgUp or up-arrow");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 3, "Quit: q or Q");
+        return chain;
     }
 
-    private Slide buildStylesSlide()
+    private PresentationComponent buildStylesSlide()
     {
-        Slide slide = new Slide();
-        slide.setTitle("Demonstration of levels and styles");
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 1, "Level 1"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 2, "Level 2"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 1, "Level 1 again"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 1, "Level 1 uses style number 1"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 2, "Level 2 uses style number 2"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 3, "This is what level 3 looks like"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 4, "And this is level 4"));
-        return slide;
+        Slide base = new Slide();
+        base.setTitle("Demonstration of levels and styles");
+        PresentationComponent chain = base;
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "Level 1");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "Level 2");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "Level 1 again");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "Level 1 uses style number 1");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "Level 2 uses style number 2");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 3, "This is what level 3 looks like");
+        chain = FACTORY_MANAGER.createComponent(chain,  XMLTags.TEXT.getTag(), 4, "And this is level 4");
+        return chain;
     }
 
-    private Slide buildClosingSlide()
+    private PresentationComponent buildClosingSlide()
     {
-        Slide slide = new Slide();
-        slide.setTitle("The third slide");
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 1, "To open a new presentation"));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 2, "use File -> Open from the menu."));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 1, " "));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.TEXT.getTag(), 1, "This is the end of the demo presentation."));
-        slide.append(FACTORY_MANAGER.createComponent(XMLTags.IMAGE.getTag(), 1, "Jabberpoint.jpg"));
+        Slide base = new Slide();
+        base.setTitle("The third slide");
 
-        return slide;
+        PresentationComponent chain = base;
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "To open a new presentation");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "use File -> Open from the menu.");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, " ");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "This is the end of the demo presentation.");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.IMAGE.getTag(), 1, "Jabberpoint.jpg");
+        return chain;
     }
 }

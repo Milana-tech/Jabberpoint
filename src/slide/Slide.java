@@ -1,11 +1,9 @@
 package slide;
 
 import presentation.PresentationComponent;
-import java.util.*;
 
 import java.awt.*;
 import java.awt.image.ImageObserver;
-import java.util.List;
 
 /**
  * slide.Slide represents a single slide in a presentation.
@@ -18,17 +16,10 @@ public class Slide implements PresentationComponent
     public static final int WIDTH = 1200;
     public static final int HEIGHT = 800;
 
-    private List<SlideItem> items;
     private String title;
 
     public Slide()
     {
-        this.items = new ArrayList<>();
-    }
-
-    public void append(SlideItem item)
-    {
-        this.items.add(item);
     }
 
     public String getTitle()
@@ -57,20 +48,7 @@ public class Slide implements PresentationComponent
         titleItem.draw(area.x, y, scale, g, titleStyle, observer);
         y += titleItem.getBoundingBox(g, observer, scale, titleStyle).height;
 
-        // Draw all items
-        for (SlideItem item : this.items)
-        {
-            Style itemStyle = Style.getStyle(item.getLevel());
-            item.draw(area.x, y, scale, g, itemStyle, observer);
-            y += item.getBoundingBox(g, observer, scale, itemStyle).height;
-        }
-
         return y;
-    }
-
-    public List<SlideItem> getSlideItems()
-    {
-        return new ArrayList<>(this.items);
     }
 
     private float calculateScale(Rectangle area)

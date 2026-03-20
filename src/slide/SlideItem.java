@@ -33,6 +33,16 @@ public abstract class SlideItem implements PresentationComponent
         this.level = level;
     }
 
+    public PresentationComponent getWrapped()
+    {
+        return this.wrapped;
+    }
+
+    public int getLevel()
+    {
+        return this.level;
+    }
+
     @Override
     public int renderTo(Graphics g, Rectangle area, ImageObserver observer)
     {
@@ -45,12 +55,6 @@ public abstract class SlideItem implements PresentationComponent
         this.draw(area.x, y, scale, g, style, observer);
         y += this.getBoundingBox(g, observer, scale, style).height;
         return y;
-    }
-
-
-    public int getLevel()
-    {
-        return this.level;
     }
 
     public abstract Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style);

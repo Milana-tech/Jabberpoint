@@ -6,6 +6,7 @@ import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 import presentation.Presentation;
+import presentation.PresentationComponent;
 import slide.*;
 import slide.SlideComponentFactoryManager;
 
@@ -16,6 +17,9 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * accessor.XMLAccessor loads and saves presentations in the JabberPoint XML format.
@@ -69,33 +73,26 @@ public class XMLAccessor extends Accessor
         }
     }
 
-    private Slide loadSlide(Element slideElement)
+    private PresentationComponent loadSlide(Element slideElement)
     {
-        Slide slide = new Slide();
-        slide.setTitle(this.readTextContent(slideElement, XMLTags.SLIDE_TITLE.getTag()));
-        this.loadAllItems(slide, slideElement);
-        return slide;
-    }
-
-    private void loadAllItems(Slide slide, Element slideElement)
-    {
+        Slide base = new Slide();
+        base.setTitle(this.readTextContent(slideElement, XMLTags.SLIDE_TITLE.getTag()));
+        PresentationComponent chain = base;
         NodeList itemNodes = slideElement.getElementsByTagName(XMLTags.ITEM.getTag());
         for (int i = 0; i < itemNodes.getLength(); i++)
         {
-            Element itemElement = (Element) itemNodes.item(i);
-            slide.append(this.loadSlideItem(itemElement));
+            chain = this.wrapItem(chain, (Element) itemNodes.item(i));
         }
+        return chain;
     }
 
-    private SlideItem loadSlideItem(Element itemElement)
+    private PresentationComponent wrapItem(PresentationComponent wrapped, Element itemElement)
     {
         NamedNodeMap attributes = itemElement.getAttributes();
         int level = this.readItemLevel(attributes);
         String kind = attributes.getNamedItem(XMLTags.KIND.getTag()).getTextContent();
         String content = itemElement.getTextContent();
-
-        // replaced if/else chain with F.M pattern, delegates item creation to SlideComponentFactoryManager
-        return FACTORY_MANAGER.createComponent(kind, level, content);
+        return FACTORY_MANAGER.createComponent(wrapped, kind, level, content);
     }
 
     private int readItemLevel(NamedNodeMap attributes)
@@ -144,11 +141,24 @@ public class XMLAccessor extends Accessor
         }
     }
 
-    private void writeSlide(PrintWriter out, Slide slide)
+    private void writeSlide(PrintWriter out, PresentationComponent component)
     {
+        // Traverse chain outermost → innermost, collect SlideItems, find Slide at the end
+        List<SlideItem> items = new ArrayList<>();
+        PresentationComponent current = component;
+
+        while (current instanceof SlideItem slideItem)
+        {
+            items.add(slideItem);
+            current = slideItem.getWrapped();
+        }
+
+        Slide slide = (Slide) current;
+        Collections.reverse(items); // restore original top-to-bottom order
+
         out.println("<slide>");
         out.println("<title>" + slide.getTitle() + "</title>");
-        for (SlideItem item : slide.getSlideItems())
+        for (SlideItem item : items)
         {
             this.writeSlideItem(out, item);
         }
