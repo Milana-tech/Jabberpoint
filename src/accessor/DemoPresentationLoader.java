@@ -12,6 +12,8 @@ import java.io.IOException;
  * <p>
  * SRP: Responsible only for constructing demo slide content.
  * IO concerns stay in accessor.XMLAccessor; demo content lives here.
+ * <p>
+ * OCP: Uses SlideComponentFactoryManager for item creation, so new item types require no changes to this class.
  */
 public class DemoPresentationLoader extends Accessor
 {
