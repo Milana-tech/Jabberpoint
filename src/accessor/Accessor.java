@@ -16,11 +16,6 @@ public abstract class Accessor
     public static final String DEMO_NAME = "Demo presentation.Presentation";
     public static final String DEFAULT_EXTENSION = ".xml";
 
-    public static Accessor getDemoAccessor()
-    {
-        return new DemoPresentationLoader();
-    }
-
     public abstract void loadPresentationFromFile(Presentation presentation, String filename) throws IOException;
 
     public abstract void savePresentationToFile(Presentation presentation, String filename) throws IOException;

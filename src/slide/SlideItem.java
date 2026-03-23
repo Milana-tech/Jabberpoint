@@ -60,4 +60,10 @@ public abstract class SlideItem implements PresentationComponent
     public abstract Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style);
 
     public abstract void draw(int x, int y, float scale, Graphics g, Style style, ImageObserver observer);
+
+    /**
+     * Returns the serialisable content of this item (text string or image filename).
+     * Used by XMLAccessor to write items without instanceof checks — OCP.
+     */
+    public abstract String getContent();
 }

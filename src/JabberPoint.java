@@ -1,4 +1,4 @@
-import accessor.Accessor;
+import accessor.DemoPresentationLoader;
 import accessor.XMLAccessor;
 import presentation.Presentation;
 import slide.SlideViewerFrame;
@@ -40,7 +40,7 @@ public class JabberPoint
     {
         if (args.length == 0)
         {
-            Accessor.getDemoAccessor().loadPresentationFromFile(presentation, "");
+            new DemoPresentationLoader().loadPresentationFromFile(presentation, "");
         }
         else
         {

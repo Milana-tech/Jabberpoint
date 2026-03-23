@@ -4,7 +4,7 @@ import accessor.XMLTags;
 import presentation.PresentationComponent;
 
 /**
- * BitmapItemFactory is responsible for creating TextItem instances
+ * BitmapItemFactory is responsible for creating BitmapItem instances
  * <p>
  * Single Responsible Principle: Has only one responsibility which is creating and identifying bitmap items
  * <p>

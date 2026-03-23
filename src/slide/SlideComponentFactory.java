@@ -3,15 +3,17 @@ package slide;
 import presentation.PresentationComponent;
 
 /**
- * SlideComponentFactory defines the contract for all slide item factories
- * Open/Closed Principle: New item types can be added by implementing this interface
- * without any modifications.
+ * SlideComponentFactory is the Creator interface in the Factory Method pattern.
  * <p>
- * Liskov Substitution Principle: All implementations are fully changeable wherever
- * this interface is expected.
+ * Factory Method pattern roles:
+ * - Creator        : SlideComponentFactory (this interface) — declares createComponent()
+ * - ConcreteCreator: TextItemFactory, BitmapItemFactory — implement createComponent()
+ * - Product        : SlideItem
+ * - ConcreteProduct: TextItem, BitmapItem
  * <p>
- * Dependency Inversion Principle: XMLAccessor & Slide depend on this abstraction,
- * not on concrete classes like TextItem or BitmapItem.
+ * OCP: New slide item types are added by implementing this interface — no existing code changes.
+ * LSP: All implementations are fully substitutable wherever SlideComponentFactory is expected.
+ * DIP: XMLAccessor and DemoPresentationLoader depend on this abstraction, not on TextItem or BitmapItem directly.
  */
 public interface SlideComponentFactory
 {

@@ -43,6 +43,11 @@ public class BitmapItem extends SlideItem
     @Override
     public Rectangle getBoundingBox(Graphics g, ImageObserver observer, float scale, Style style)
     {
+        if (this.image == null)
+        {
+            return new Rectangle((int) (style.indent * scale), 0, 0, 0);
+        }
+
         return new Rectangle(
                 (int) (style.indent * scale),
                 0,
@@ -54,6 +59,11 @@ public class BitmapItem extends SlideItem
     @Override
     public void draw(int x, int y, float scale, Graphics g, Style style, ImageObserver observer)
     {
+        if (this.image == null)
+        {
+            return;
+        }
+        
         int drawX = x + (int) (style.indent * scale);
         int drawY = y + (int) (style.leading * scale);
         g.drawImage(
@@ -63,6 +73,12 @@ public class BitmapItem extends SlideItem
                 (int) (this.image.getHeight(observer) * scale),
                 observer
         );
+    }
+
+    @Override
+    public String getContent()
+    {
+        return this.getName();
     }
 
     @Override
