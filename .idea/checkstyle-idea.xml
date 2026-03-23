@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CheckStyle-IDEA" serialisationVersion="2">
-    <checkstyleVersion>13.3.0</checkstyleVersion>
+    <checkstyleVersion>12.3.1</checkstyleVersion>
     <scanScope>JavaOnly</scanScope>
     <copyLibs>true</copyLibs>
     <option name="thirdPartyClasspath" />
     <option name="activeLocationIds">
-      <option value="d3d29dd2-c493-4ecd-a422-7f477b24445b" />
+      <option value="2e6fed90-4870-4450-8a0f-a35d198c0bee" />
     </option>
     <option name="locations">
       <list>
         <ConfigurationLocation id="bundled-sun-checks" type="BUNDLED" scope="All" description="Sun Checks">(bundled)</ConfigurationLocation>
         <ConfigurationLocation id="bundled-google-checks" type="BUNDLED" scope="All" description="Google Checks">(bundled)</ConfigurationLocation>
-        <ConfigurationLocation id="d3d29dd2-c493-4ecd-a422-7f477b24445b" type="LOCAL_FILE" scope="All" description="Jabberpoint checkstyle">E:\Stenden\Year 2\Semester 2\Software Quality\Jabberpoint\.github\checkstyle.xml</ConfigurationLocation>
+        <ConfigurationLocation id="2e6fed90-4870-4450-8a0f-a35d198c0bee" type="LOCAL_FILE" scope="All" description="conventions">C:\Users\gebruiker\IdeaProjects\Jabberpoint\.github\checkstyle.xml</ConfigurationLocation>
       </list>
     </option>
   </component>
