@@ -56,7 +56,10 @@ public class XMLAccessor extends Accessor
 
     private Document parseXmlFile(String filename) throws IOException, SAXException, ParserConfigurationException
     {
-        DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
+        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+        factory.setValidating(false);
+        DocumentBuilder builder = factory.newDocumentBuilder();
+        builder.setEntityResolver((publicId, systemId) -> new org.xml.sax.InputSource(new java.io.StringReader("")));
         return builder.parse(new File(filename));
     }
 
