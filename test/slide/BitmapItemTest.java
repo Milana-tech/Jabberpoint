@@ -1,7 +1,7 @@
+package slide;
+
 import org.junit.jupiter.api.Test;
 import presentation.PresentationComponent;
-import slide.BitmapItem;
-import slide.Slide;
 
 import static org.junit.jupiter.api.Assertions.*;
 

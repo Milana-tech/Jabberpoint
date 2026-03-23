@@ -1,11 +1,9 @@
+package slide;
+
 import org.junit.jupiter.api.Assumptions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import presentation.Presentation;
-import presentation.PresentationComponent;
-import slide.Slide;
-import slide.SlideViewerComponent;
-import slide.Style;
 
 import javax.swing.*;
 import java.awt.*;

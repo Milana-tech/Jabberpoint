@@ -1,3 +1,5 @@
+package accessor;
+
 import org.junit.jupiter.api.Test;
 import accessor.XMLTags;
 
