@@ -46,7 +46,7 @@ jobs:
           javac -encoding UTF-8 -cp lib/junit-platform-console-standalone.jar src/presentation/*.java src/slide/*.java src/accessor/*.java src/controller/*.java src/JabberPoint.java -d out
 
       - name: Compile test files
-        run: javac -encoding UTF-8 -cp lib/junit-platform-console-standalone.jar:out test/PresentationObserverTest.java -d out
+        run: javac -encoding UTF-8 -cp lib/junit-platform-console-standalone.jar:out test/presentation/*.java test/slide/*.java test/accessor/*.java test/controller/*.java -d out
 
       - name: Run JUnit 5 tests
         run: |
