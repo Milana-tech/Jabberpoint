@@ -1,5 +1,7 @@
 package slide;
 
+import presentation.PresentationComponent;
+
 import java.awt.*;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
@@ -24,15 +26,16 @@ public class TextItem extends SlideItem
 
     private final String text;
 
+    public TextItem(PresentationComponent wrapped, int level, String text)
+    {
+        super(wrapped, level);
+        this.text = text;
+    }
+
     public TextItem(int level, String text)
     {
         super(level);
         this.text = text;
-    }
-
-    public TextItem()
-    {
-        this(DEFAULT_LEVEL, EMPTY_TEXT);
     }
 
     public String getText()

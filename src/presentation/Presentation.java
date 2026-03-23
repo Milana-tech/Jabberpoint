@@ -1,7 +1,5 @@
 package presentation;
 
-import slide.Slide;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,17 +17,20 @@ public class Presentation
     private static final int NO_SLIDE = -1;
 
     private String title;
-    private final List<Slide> slides;
     private int currentSlideNumber;
 
     // Observer pattern: list of registered observers
 
     private final List<PresentationObserver> observers;
 
+    // Decorator pattern: list of registered components
+
+    private final List<PresentationComponent> components;
+
     public Presentation()
     {
-        this.slides = new ArrayList<>();
         this.observers = new ArrayList<>();
+        this.components = new ArrayList<>();
         this.currentSlideNumber = NO_SLIDE;
     }
 
@@ -59,7 +60,7 @@ public class Presentation
      */
     private void notifyObservers()
     {
-        Slide currentSlide = this.getCurrentSlide();
+        PresentationComponent currentSlide = this.getCurrentSlide();
         for (PresentationObserver observer : this.observers)
         {
             observer.onSlideChanged(currentSlide);
@@ -80,7 +81,7 @@ public class Presentation
 
     public int getSize()
     {
-        return this.slides.size();
+        return this.components.size();
     }
 
     public int getSlideNumber()
@@ -98,7 +99,7 @@ public class Presentation
 
     public void nextSlide()
     {
-        if (this.currentSlideNumber < this.slides.size() - 1)
+        if (this.currentSlideNumber < this.components.size() - 1)
         {
             this.setSlideNumber(this.currentSlideNumber + 1);
         }
@@ -114,28 +115,28 @@ public class Presentation
 
     // slide.Slide management
 
-    public void append(Slide slide)
+    public void append(PresentationComponent component)
     {
-        this.slides.add(slide);
+        this.components.add(component);
     }
 
-    public Slide getSlide(int number)
+    public PresentationComponent getSlide(int number)
     {
         if (this.isValidSlideNumber(number))
         {
-            return this.slides.get(number);
+            return this.components.get(number);
         }
         return null;
     }
 
-    public Slide getCurrentSlide()
+    public PresentationComponent getCurrentSlide()
     {
         return this.getSlide(this.currentSlideNumber);
     }
 
     public void clear()
     {
-        this.slides.clear();
+        this.components.clear();
         this.setSlideNumber(NO_SLIDE);
     }
 
@@ -146,6 +147,6 @@ public class Presentation
 
     private boolean isValidSlideNumber(int number)
     {
-        return number >= 0 && number < this.slides.size();
+        return number >= 0 && number < this.components.size();
     }
 }
