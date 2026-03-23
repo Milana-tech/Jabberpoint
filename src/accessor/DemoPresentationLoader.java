@@ -62,7 +62,7 @@ public class DemoPresentationLoader extends Accessor
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "Level 1 uses style number 1");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "Level 2 uses style number 2");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 3, "This is what level 3 looks like");
-        chain = FACTORY_MANAGER.createComponent(chain,  XMLTags.TEXT.getTag(), 4, "And this is level 4");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 4, "And this is level 4");
         return chain;
     }
 
@@ -76,7 +76,7 @@ public class DemoPresentationLoader extends Accessor
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "use File -> Open from the menu.");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, " ");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "This is the end of the demo presentation.");
-        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.IMAGE.getTag(), 1, "Jabberpoint.gif");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.IMAGE.getTag(), 1, "JabberPoint.gif");
         return chain;
     }
 }

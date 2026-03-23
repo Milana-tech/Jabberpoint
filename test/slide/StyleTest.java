@@ -1,6 +1,7 @@
+package slide;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import slide.Style;
 
 import java.awt.Color;
 import java.awt.Font;

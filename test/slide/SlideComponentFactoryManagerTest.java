@@ -1,11 +1,7 @@
+package slide;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import slide.BitmapItem;
-import slide.Slide;
-import slide.SlideComponentFactoryManager;
-import slide.SlideItem;
-import slide.Style;
-import slide.TextItem;
 
 import static org.junit.jupiter.api.Assertions.*;
 

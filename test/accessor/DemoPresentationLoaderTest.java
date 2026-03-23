@@ -1,6 +1,7 @@
+package accessor;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import accessor.DemoPresentationLoader;
 import presentation.Presentation;
 import presentation.PresentationComponent;
 import slide.Slide;

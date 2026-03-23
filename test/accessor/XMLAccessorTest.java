@@ -1,7 +1,8 @@
+package accessor;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import accessor.XMLAccessor;
 import presentation.Presentation;
 import presentation.PresentationComponent;
 import slide.Slide;

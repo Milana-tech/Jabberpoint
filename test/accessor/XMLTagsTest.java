@@ -1,5 +1,6 @@
+package accessor;
+
 import org.junit.jupiter.api.Test;
-import accessor.XMLTags;
 
 import static org.junit.jupiter.api.Assertions.*;
 

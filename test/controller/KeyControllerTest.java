@@ -1,6 +1,7 @@
+package controller;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import controller.KeyController;
 import presentation.Presentation;
 
 import java.awt.Panel;
