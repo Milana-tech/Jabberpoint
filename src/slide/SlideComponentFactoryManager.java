@@ -17,7 +17,7 @@ import java.util.Map;
  * <p>
  * OCP: New item types are supported by registering a new factory, so this class never needs to change.
  * <p>
- * DIP: Depends on the SlideComponentFactoryManager, not on concrete factories directly.
+ * DIP: Depends on the SlideComponentFactory abstraction, not on TextItemFactory or BitmapItemFactory directly.
  */
 public class SlideComponentFactoryManager
 {

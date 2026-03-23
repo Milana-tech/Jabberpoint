@@ -8,7 +8,7 @@ package accessor;
  */
 public enum XMLTags
 {
-    SHOW_TITLE("show title"),
+    SHOW_TITLE("showtitle"),
     SLIDE_TITLE("title"),
     SLIDE("slide"),
     ITEM("item"),

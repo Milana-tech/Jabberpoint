@@ -1,0 +1,10 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Compiled output
+out/
+bin/
+
+# macOS
+.DS_Store

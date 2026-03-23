@@ -8,7 +8,6 @@ import org.xml.sax.SAXException;
 import presentation.Presentation;
 import presentation.PresentationComponent;
 import slide.*;
-import slide.SlideComponentFactoryManager;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -34,8 +33,6 @@ public class XMLAccessor extends Accessor
     private static final String UNKNOWN_ITEM_TYPE = "Unknown slide item type: ";
     private static final String UNKNOWN_LEVEL = "Could not read item level, defaulting to 1";
     private static final int DEFAULT_ITEM_LEVEL = 1;
-
-    private XMLTags message;
 
     @Override
     public void loadPresentationFromFile(Presentation presentation, String filename) throws IOException
@@ -167,20 +164,15 @@ public class XMLAccessor extends Accessor
 
     private void writeSlideItem(PrintWriter out, SlideItem item)
     {
-        if (item instanceof TextItem textItem)
-        {
-            out.println("<item kind=\"text\" level=\"" + textItem.getLevel() + "\">"
-                    + textItem.getText() + "</item>");
-        }
-        else if (item instanceof BitmapItem bitmapItem)
-        {
-            out.println("<item kind=\"image\" level=\"" + bitmapItem.getLevel() + "\">"
-                    + bitmapItem.getName() + "</item>");
-        }
-        else
+        // OCP: delegate type resolution to the factory manager — no instanceof needed here
+        String type = FACTORY_MANAGER.getType(item);
+        if (type.isEmpty())
         {
             System.err.println("Skipping unknown slide.SlideItem type: " + item);
+            return;
         }
+        out.println("<item kind=\"" + type + "\" level=\"" + item.getLevel() + "\">"
+                + item.getContent() + "</item>");
     }
 
     private String readTextContent(Element element, String tagName)

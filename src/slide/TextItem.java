@@ -115,6 +115,12 @@ public class TextItem extends SlideItem
     }
 
     @Override
+    public String getContent()
+    {
+        return this.getText();
+    }
+
+    @Override
     public String toString()
     {
         return "slide.TextItem[" + getLevel() + "," + this.getText() + "]";

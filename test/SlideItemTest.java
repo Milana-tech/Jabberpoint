@@ -42,6 +42,9 @@ class SlideItemTest
             @Override
             public void draw(int x, int y, float scale, Graphics g, Style
                     style, ImageObserver observer) {}
+
+            @Override
+            public String getContent() { return ""; }
         };
     }
 
