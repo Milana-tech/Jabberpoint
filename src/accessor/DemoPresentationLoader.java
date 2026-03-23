@@ -76,7 +76,7 @@ public class DemoPresentationLoader extends Accessor
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "use File -> Open from the menu.");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, " ");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "This is the end of the demo presentation.");
-        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.IMAGE.getTag(), 1, "Jabberpoint.jpg");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.IMAGE.getTag(), 1, "Jabberpoint.gif");
         return chain;
     }
 }

@@ -2,12 +2,10 @@ package slide;
 
 import presentation.PresentationComponent;
 
-import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.io.File;
-import java.io.IOException;
 
 /**
  * slide.BitmapItem renders an image file on a slide.
@@ -19,7 +17,7 @@ public class BitmapItem extends SlideItem
 {
 
     private final String imageName;
-    private final BufferedImage image;
+    private final Image image;
 
     public BitmapItem(PresentationComponent wrapped, int level, String imageName)
     {
@@ -87,20 +85,17 @@ public class BitmapItem extends SlideItem
         return "slide.BitmapItem[" + getLevel() + "," + this.imageName + "]";
     }
 
-    private static BufferedImage loadImage(String imageName)
+    private static Image loadImage(String imageName)
     {
         if (imageName == null)
         {
             return null;
         }
-        try
-        {
-            return ImageIO.read(new File(imageName));
-        }
-        catch (IOException e)
-        {
+        File file = new File(imageName);
+        if (!file.exists()) {
             System.err.println("Image file not found: " + imageName);
             return null;
         }
+        return new ImageIcon(imageName).getImage();
     }
 }
