@@ -43,7 +43,7 @@ public class DemoPresentationLoader extends Accessor
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "The Java presentation.Presentation Tool");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "Copyright (c) 1996-2000: Ian Darwin");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 2, "Copyright (c) 2000-now: Gert Florijn and Sylvia Stuurman");
-        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 4, "Running JabberPoint without a filename shows    this demo");
+        chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 4, "Running JabberPoint without a filename shows this demo");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 1, "Navigation:");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 3, "Next slide: PgDn or Enter");
         chain = FACTORY_MANAGER.createComponent(chain, XMLTags.TEXT.getTag(), 3, "Previous slide: PgUp or up-arrow");
