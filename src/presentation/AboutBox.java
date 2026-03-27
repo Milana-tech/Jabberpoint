@@ -5,7 +5,7 @@ import java.awt.*;
 
 /**
  * presentation.AboutBox shows the application's about dialog.
- *
+ * <p>
  * SRP: Responsible only for displaying the about message.
  */
 

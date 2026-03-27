@@ -6,9 +6,13 @@ import java.awt.*;
 import java.awt.image.ImageObserver;
 
 /**
- * slide.Slide represents a single slide in a presentation.
+ * slide.Slide represents a single slide in a presentation and draws its title.
  * <p>
- * SRP: Owns slide state (title, items) and delegates drawing to its items.
+ * Decorator pattern role: Concrete Component — the innermost object in the decorator chain.
+ * slide.SlideItem decorators wrap a slide.Slide and add their own content on top of it.
+ * <p>
+ * SRP: Responsible only for storing the slide title and rendering it.
+ * OCP: Does not need to change when new slide.SlideItem are added — decorators handle that.
  */
 public class Slide implements PresentationComponent
 {
@@ -31,10 +35,6 @@ public class Slide implements PresentationComponent
     {
         this.title = title;
     }
-
-    /**
-     * Convenience method: creates a slide.TextItem and appends it.
-     */
 
     @Override
     public int renderTo(Graphics g, Rectangle area, ImageObserver observer)

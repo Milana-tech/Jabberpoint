@@ -9,14 +9,11 @@ import java.util.Map;
 
 
 /**
- * SlideComponentFactoryManager manages registered factories and
- * delegates slide item creation to the appropriate factory based on type.
+ * SlideComponentFactoryManager manages registered factories and delegates slide item creation to the appropriate factory based on type.
  * <p>
  * SRP: Responsible only for factory registration and creation delegation.
  * It doesn't create any specific item itself.
- * <p>
  * OCP: New item types are supported by registering a new factory, so this class never needs to change.
- * <p>
  * DIP: Depends on the SlideComponentFactory abstraction, not on TextItemFactory or BitmapItemFactory directly.
  */
 public class SlideComponentFactoryManager

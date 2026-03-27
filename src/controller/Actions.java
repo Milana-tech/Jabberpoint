@@ -2,6 +2,7 @@ package controller;
 
 /**
  * controller.Actions enumerates all user triggered actions in JabberPoint.
+ * <p>
  * SRP: This enum owns the single responsibility of naming available actions.
  * OCP: New actions are added here without changing controller.KeyController or controller.MenuController logic.
  */
