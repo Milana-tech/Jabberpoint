@@ -18,7 +18,6 @@ import java.io.File;
  */
 public class BitmapItem extends SlideItem
 {
-
     private final String imageName;
     private final Image image;
 
@@ -64,7 +63,7 @@ public class BitmapItem extends SlideItem
         {
             return;
         }
-        
+
         int drawX = x + (int) (style.indent * scale);
         int drawY = y + (int) (style.leading * scale);
         g.drawImage(
@@ -95,7 +94,8 @@ public class BitmapItem extends SlideItem
             return null;
         }
         File file = new File(imageName);
-        if (!file.exists()) {
+        if (!file.exists())
+        {
             System.err.println("Image file not found: " + imageName);
             return null;
         }
