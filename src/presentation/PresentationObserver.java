@@ -6,8 +6,10 @@ package presentation;
  * This decouples presentation.Presentation (the subject) from slide.SlideViewerComponent (the observer):
  * presentation.Presentation does not need to know about Swing or any specific viewer.
  * Observer pattern role: Observer
+ * <p>
  * OCP: New observers can be added without changing presentation.Presentation.
- * DIP: presentation.Presentation depends on this abstraction, not on slide.SlideViewerComponent directly.
+ * DIP: presentation.Pre
+ * sentation depends on this abstraction, not on slide.SlideViewerComponent directly.
  */
 public interface PresentationObserver
 {

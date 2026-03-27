@@ -12,6 +12,7 @@ import java.io.Serial;
  * slide.SlideViewerComponent renders the current slide inside the application window.
  * <p>
  * Observer pattern role: Concrete Observer reacts to slide changes via onSlideChanged().
+ * <p>
  * SRP: Responsible only for rendering a slide onto the screen.
  * DIP: Registers itself with presentation.Presentation via the presentation.PresentationObserver interface
  * presentation.Presentation never references slide.SlideViewerComponent directly.

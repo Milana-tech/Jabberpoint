@@ -10,8 +10,7 @@ import java.io.IOException;
 /**
  * JabberPoint is the application entry point.
  * <p>
- * SRP: Responsible only for bootstrapping the application — wiring styles,
- * presentation, and viewer, then loading the initial content.
+ * SRP: Responsible only for bootstrapping the application — wiring styles, presentation, and viewer, then loading the initial content.
  */
 public class JabberPoint
 {

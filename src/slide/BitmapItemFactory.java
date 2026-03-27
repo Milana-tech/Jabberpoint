@@ -6,12 +6,11 @@ import presentation.PresentationComponent;
 /**
  * BitmapItemFactory is responsible for creating BitmapItem instances
  * <p>
- * Single Responsible Principle: Has only one responsibility which is creating and identifying bitmap items
+ * Factory Method pattern role: Concrete Creator - implements createComponent() to produce slide.BitmapItem
  * <p>
- * Open/Close Principle: Closed for changes; extend the factory system by adding
- * new factories, not this class.
- * <p>
- *  Liskov Substitution Principle: Completely substitutes SlideComponentFactory wherever it's required
+ * SRP: Has only one responsibility which is creating and identifying bitmap items
+ * OCP: Closed for changes; extend the factory system by adding new factories, not this class.
+ * LSP: Completely substitutes SlideComponentFactory wherever it's required
  * */
 public class BitmapItemFactory implements SlideComponentFactory
 {

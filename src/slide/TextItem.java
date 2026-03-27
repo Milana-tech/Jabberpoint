@@ -16,6 +16,9 @@ import java.util.List;
 /**
  * slide.TextItem renders a single line of text on a slide, with word-wrapping.
  * <p>
+ * Decorator pattern role: Concrete Decorator - extends slide.SlideItem to add text rendering on top of whatever presentation.PresentationComponent it wraps.
+ * Factory Method pattern role: ConcreteProduct — the specific product created by slide.TextItemFactory. Returned wherever a text item is requested from the factory.
+ * <p>
  * SRP: Responsible only for measuring and drawing attributed text.
  * LSP: Fully substitutes slide.SlideItem — honours the drawing contract.
  */
