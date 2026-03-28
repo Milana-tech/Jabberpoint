@@ -49,7 +49,7 @@ public abstract class SlideItem implements PresentationComponent
     @Override
     public int renderTo(Graphics g, Rectangle area, ImageObserver observer)
     {
-        int y = (this.wrapped != null) ? this.wrapped.renderTo(g, area, observer) : area.y;
+        int y = (this.wrapped != null) ? this.wrapped .renderTo(g, area, observer) : area.y;
         float scale = Math.min(
                 (float) area.width / Slide.WIDTH,
                 (float) area.height / Slide.HEIGHT

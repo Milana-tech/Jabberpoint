@@ -87,4 +87,18 @@ class SlideItemTest
         // Assert — item added its own height (50) on top
         assertTrue(itemY > slideY);
     }
+
+    @Test
+    void getWrapped_withDoubleWrappedSlide_returnsCorrectChain()
+    {
+        // Arrange
+        Slide innerSlide = new Slide();
+        TextItem inner = new TextItem(innerSlide, 1, "hi");
+        SlideItem outer = new TextItem(inner, 2, "you");
+
+        // Act & Assert — outer wraps inner
+        assertSame(inner, outer.getWrapped());
+        // inner wraps the original slide
+        assertSame(innerSlide, ((SlideItem) outer.getWrapped()).getWrapped());
+    }
 }

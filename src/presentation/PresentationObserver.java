@@ -8,8 +8,7 @@ package presentation;
  * Observer pattern role: Observer
  * <p>
  * OCP: New observers can be added without changing presentation.Presentation.
- * DIP: presentation.Pre
- * sentation depends on this abstraction, not on slide.SlideViewerComponent directly.
+ * DIP: presentation.Presentation depends on this abstraction, not on slide.SlideViewerComponent directly.
  */
 public interface PresentationObserver
 {
