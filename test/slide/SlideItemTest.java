@@ -94,7 +94,7 @@ class SlideItemTest
         // Arrange
         Slide innerSlide = new Slide();
         TextItem inner = new TextItem(innerSlide, 1, "hi");
-        SlideItem outer = new TextItem(inner, 2, "you");
+        TextItem outer = new TextItem(inner, 2, "you");
 
         // Act & Assert — outer wraps inner
         assertSame(inner, outer.getWrapped());
