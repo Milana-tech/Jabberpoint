@@ -28,6 +28,19 @@ class DemoPresentationLoaderTest
         return (Slide) component;
     }
 
+    private int
+    countItems(PresentationComponent
+                       component)
+    {
+        int count = 0;
+        while (component instanceof SlideItem si)
+        {
+            count++;
+            component = si.getWrapped();
+        }
+        return count;
+    }
+
     @BeforeEach
     void setUp()
     {
@@ -89,6 +102,15 @@ class DemoPresentationLoaderTest
         loader.loadPresentationFromFile(p2, "other.xml");
         assertEquals(presentation.getSize(), p2.getSize());
     }
+
+    @Test
+    void load_firstSlide_hasEightItems()
+    {
+        loader.loadPresentationFromFile(presentation, "ignored");
+        assertEquals(8,
+                countItems(presentation.getSlide(0)));
+    }
+
 
     @Test
     void save_throwsUnsupportedOperationException()
